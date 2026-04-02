@@ -13,6 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { ExportPdfButton } from "@/components/export-pdf-button";
 import {
   TrendingUp,
   Eye,
@@ -145,13 +146,16 @@ export default function HomePage() {
   return (
     <div className="w-full grow bg-gray-50/60">
       <header className="border-b bg-white">
-        <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
-            EatClub Pilot Results Dashboard
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            2 weeks into 1-month pilot
-          </p>
+        <div className="mx-auto flex max-w-6xl items-start justify-between gap-4 px-4 py-6 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-1">
+            <h1 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+              EatClub Pilot Results Dashboard
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              2 weeks into 1-month pilot
+            </p>
+          </div>
+          <ExportPdfButton />
         </div>
       </header>
 
