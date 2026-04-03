@@ -98,8 +98,6 @@ const keywords = [
 const themes = [
   { label: "Trust / legitimacy threads", pct: 84 },
   { label: "London launch threads", pct: 73 },
-  { label: 'Explainer / "what is EatClub"', pct: 61 },
-  { label: "Category comparison keywords", pct: 42 },
 ];
 
 const actions = [
@@ -181,52 +179,6 @@ export default function HomePage() {
 
         {/* Keyword table + What's working */}
         <section className="grid grid-cols-1 gap-4 lg:grid-cols-5">
-          <Card className="lg:col-span-3">
-            <CardHeader>
-              <CardTitle>Campaign performance</CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
-              <Table>
-                <TableHeader>
-                  <TableRow className="bg-gray-50/50">
-                    <TableHead className="pl-4">Keyword</TableHead>
-                    <TableHead>Sentiment</TableHead>
-                    <TableHead>Mentions</TableHead>
-                    <TableHead>Status</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {keywords.map((row) => (
-                    <TableRow key={row.keyword}>
-                      <TableCell className="pl-4 font-medium text-gray-900">
-                        {row.keyword}
-                      </TableCell>
-                      <TableCell className="tabular-nums">
-                        {row.sentiment}
-                      </TableCell>
-                      <TableCell className="tabular-nums">
-                        {row.mentions}
-                      </TableCell>
-                      <TableCell>
-                        <span
-                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${statusStyles[row.tier]}`}
-                        >
-                          <StatusIcon tier={row.tier} />
-                          {row.status}
-                        </span>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-            <CardFooter>
-              <p className="text-xs text-muted-foreground">
-                Trust is moving first, while broader category keywords need
-                another cycle.
-              </p>
-            </CardFooter>
-          </Card>
 
           <Card className="lg:col-span-2">
             <CardHeader>
