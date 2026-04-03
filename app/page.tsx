@@ -74,7 +74,7 @@ export default function HomePage() {
         <div className="mx-auto flex max-w-6xl items-start justify-between gap-4 px-4 py-6 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-1">
             <h1 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
-              EatClub Pilot Results
+              EatClub Pilot Reports
             </h1>
             <p className="text-sm text-muted-foreground">
               2 weeks into a 1-month pilot
