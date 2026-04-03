@@ -130,17 +130,72 @@
 }
 
 @media print {
+  @page {
+    margin: 0.4in;
+  }
+
+  html {
+    height: auto !important;
+  }
+
   body {
     background: white !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    font-size: 12px;
+    min-height: 0 !important;
+    height: auto !important;
+    display: block !important;
   }
 
   .print\:hidden {
     display: none !important;
   }
 
-  * {
+  header {
+    border: none !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  header > div {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+
+  main {
+    gap: 0.5rem !important;
+    padding-top: 0.25rem !important;
+  }
+
+  main > section {
+    gap: 0.5rem !important;
+  }
+
+  /* Kill flex-grow that stretches the page to viewport height */
+  .grow, .flex-1 {
+    flex-grow: 0 !important;
+  }
+
+  [data-slot="card"] {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #e5e7eb !important;
+  }
+
+  [data-slot="card-header"] {
+    padding: 0.5rem 0.75rem 0.25rem !important;
+  }
+
+  [data-slot="card-content"] {
+    padding: 0.25rem 0.75rem !important;
+  }
+
+  [data-slot="card-footer"] {
+    padding: 0.25rem 0.75rem 0.5rem !important;
+  }
+
+  li {
     break-inside: avoid;
   }
 }

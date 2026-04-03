@@ -3,135 +3,69 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-  CardFooter,
 } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { ExportPdfButton } from "@/components/export-pdf-button";
 import {
   TrendingUp,
   Eye,
-  MessageCircle,
-  Sparkles,
-  ArrowUpRight,
   CheckCircle2,
-  AlertTriangle,
-  XCircle,
+  Target,
+  ShieldCheck,
 } from "lucide-react";
 
 const kpis = [
   {
-    label: "Avg. sentiment across target keywords",
+    label: "Sentiment",
     value: "49%",
-    delta: "↑ from 44% baseline",
-    status: "good" as const,
+    note: (
+      <>
+        <strong className="text-gray-900">Up from 44%</strong> baseline. Early
+        proof that conversation quality is improving.
+      </>
+    ),
     icon: TrendingUp,
   },
   {
-    label: "Page 1 / visible ranking threads",
+    label: "Visible trust threads",
     value: "6",
-    delta: "↑ 2 new ranking threads",
-    status: "good" as const,
+    note: (
+      <>
+        EatClub is showing up in high-intent searches like{" "}
+        <strong className="text-gray-900">&ldquo;is EatClub legit&rdquo;</strong>
+        .
+      </>
+    ),
     icon: Eye,
   },
-  {
-    label: "Best performing theme",
-    value: '"Is EatClub legit?"',
-    delta: "Trust objection content is resonating",
-    status: "good" as const,
-    icon: Sparkles,
-    smallValue: true,
-  },
 ];
 
-const keywords = [
+const proofPoints = [
   {
-    keyword: "is eatclub legit australia",
-    sentiment: "52%",
-    mentions: 31,
-    status: "Working",
-    tier: "good" as const,
+    title: "We\u2019re showing up in the right places",
+    description:
+      'Users check trust-related Reddit searches before trying the product. That is why traction on \u201Cis EatClub legit\u201D matters more right now than broader category keywords.',
+    icon: ShieldCheck,
   },
   {
-    keyword: "is eatclub legit london",
-    sentiment: "50%",
-    mentions: 27,
-    status: "Working",
-    tier: "good" as const,
+    title: "Trust is moving in the right direction",
+    description:
+      "Sentiment has improved from 44% to 49%. It is still early, but the conversation is shifting in the direction we want.",
+    icon: TrendingUp,
   },
-  {
-    keyword: "what is eatclub",
-    sentiment: "47%",
-    mentions: 22,
-    status: "Needs more volume",
-    tier: "warn" as const,
-  },
-  {
-    keyword: "is eatclub legit manchester",
-    sentiment: "46%",
-    mentions: 19,
-    status: "Too early",
-    tier: "warn" as const,
-  },
-  {
-    keyword: "best apps for restaurant discounts australia",
-    sentiment: "49%",
-    mentions: 25,
-    status: "Rising",
-    tier: "good" as const,
-  },
-  {
-    keyword: "best restaurant discount app london",
-    sentiment: "43%",
-    mentions: 12,
-    status: "Weak thread pickup",
-    tier: "bad" as const,
-  },
-];
-
-const themes = [
-  { label: "Trust / legitimacy threads", pct: 84 },
-  { label: "London launch threads", pct: 73 },
 ];
 
 const actions = [
-  'Double down on "legit" and payment-process threads for London + Manchester.',
-  "Add 2 comparison-style threads against generic discount apps to sharpen differentiation.",
-  "Turn the strongest live threads into follow-on replies that answer common objections: restaurant quality, hidden catches, and card flow.",
-  "Track app signups from Reddit landing paths weekly so we connect sentiment movement to business outcome.",
+  {
+    title: "Double down on trust threads",
+    description:
+      'Keep pushing "is EatClub legit" and related trust questions, because that is where we are already seeing traction.',
+  },
+  {
+    title: 'Expand into "how it works"',
+    description:
+      "Build on trust by reinforcing the payment flow and how EatClub works before users convert.",
+  },
 ];
-
-const statusStyles = {
-  good: "bg-emerald-50 text-emerald-700 ring-emerald-200",
-  warn: "bg-amber-50 text-amber-700 ring-amber-200",
-  bad: "bg-red-50 text-red-700 ring-red-200",
-};
-
-const deltaStyles = {
-  good: "text-emerald-600",
-  warn: "text-amber-600",
-  bad: "text-red-600",
-};
-
-const StatusIcon = ({ tier }: { tier: "good" | "warn" | "bad" }) => {
-  if (tier === "good")
-    return <CheckCircle2 className="size-3.5 text-emerald-600" />;
-  if (tier === "warn")
-    return <AlertTriangle className="size-3.5 text-amber-600" />;
-  return <XCircle className="size-3.5 text-red-600" />;
-};
-
-const barGradient = (pct: number) => {
-  if (pct >= 70) return "from-emerald-400 to-emerald-500";
-  if (pct >= 50) return "from-blue-400 to-blue-500";
-  return "from-amber-400 to-amber-500";
-};
 
 export default function HomePage() {
   return (
@@ -140,10 +74,10 @@ export default function HomePage() {
         <div className="mx-auto flex max-w-6xl items-start justify-between gap-4 px-4 py-6 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-1">
             <h1 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl">
-              EatClub Pilot Results Dashboard
+              EatClub Pilot Results
             </h1>
             <p className="text-sm text-muted-foreground">
-              2 weeks into 1-month pilot
+              2 weeks into a 1-month pilot
             </p>
           </div>
           <ExportPdfButton />
@@ -151,6 +85,9 @@ export default function HomePage() {
       </header>
 
       <main className="mx-auto flex max-w-6xl flex-col gap-5 px-4 py-6 sm:px-6 lg:px-8">
+        {/* Hero summary */}
+        
+
         {/* KPI cards */}
         <section className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {kpis.map((kpi) => (
@@ -163,67 +100,114 @@ export default function HomePage() {
                   <kpi.icon className="size-4 text-muted-foreground/60" />
                 </div>
               </CardHeader>
-              <CardContent className="flex flex-col gap-2 justify-center h-full">
-                <p
-                  className={`font-bold tracking-tight ${kpi.smallValue ? "text-2xl" : "text-3xl"}`}
-                >
+              <CardContent className="flex flex-col gap-2">
+                <p className="text-3xl font-bold tracking-tight">
                   {kpi.value}
                 </p>
-                <p className={`text-xs ${deltaStyles[kpi.status]}`}>
-                  {kpi.delta}
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {kpi.note}
                 </p>
               </CardContent>
             </Card>
           ))}
-        </section>
 
-        {/* Keyword table + What's working */}
-        <section className="grid grid-cols-1 gap-4 lg:grid-cols-5">
-
-          <Card className="lg:col-span-2">
-            <CardHeader>
-              <CardTitle>What&apos;s working right now</CardTitle>
+          <Card>
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Progress toward target
+                </span>
+                <Target className="size-4 text-muted-foreground/60" />
+              </div>
             </CardHeader>
-            <CardContent className="flex flex-col gap-4">
-              {themes.map((t) => (
-                <div key={t.label} className="flex flex-col gap-1.5">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-700">{t.label}</span>
-                    <span className="font-semibold tabular-nums">{t.pct}%</span>
-                  </div>
-                  <div className="h-2.5 overflow-hidden rounded-full bg-gray-100">
-                    <div
-                      className={`h-full rounded-full bg-linear-to-r ${barGradient(t.pct)} transition-all`}
-                      style={{ width: `${t.pct}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-            <CardFooter>
-              <p className="text-xs text-muted-foreground">
-                Objection-handling content is producing earlier signal than broad
-                category demand capture. That is normal for a 2-week-old Reddit
-                campaign.
+            <CardContent className="flex flex-col gap-2">
+              <p className="text-3xl font-bold tracking-tight">49% → 60%</p>
+              <div className="h-2.5 overflow-hidden rounded-full bg-gray-100">
+                <div
+                  className="h-full rounded-full bg-linear-to-r from-emerald-400 to-emerald-500"
+                  style={{ width: "80%" }}
+                />
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                ~80% of the way to target. Clear movement toward improving
+                trust.
               </p>
-            </CardFooter>
+            </CardContent>
           </Card>
         </section>
 
-        {/* Recommended actions */}
+        {/* What this means */}
+        <section className="grid grid-cols-1 gap-4 lg:grid-cols-5">
+        <Card className="border-emerald-100 bg-linear-to-b from-white to-gray-50/60 lg:col-span-2">
+            <CardHeader>
+            <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">
+                <CheckCircle2 className="size-3.5" />
+                Early signal is positive
+              </span>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-3">
+              
+              <h2 className="text-lg font-bold tracking-tight text-gray-900 sm:text-xl leading-snug max-w-2xl">
+                Early traction is showing up in trust-related searches, where
+                users decide whether to try EatClub.
+              </h2>
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">
+                This matters because these are high-intent users. Improving
+                trust here directly impacts whether someone tries the product.
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="lg:col-span-3">
+            <CardHeader>
+              <CardTitle>What this means</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-0">
+              {proofPoints.map((item, i) => (
+                <div
+                  key={item.title}
+                  className={`flex items-start gap-4 py-3.5 ${i > 0 ? "border-t border-gray-100" : ""}`}
+                >
+                  <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-gray-100">
+                    <item.icon className="size-4 text-gray-600" />
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-900">
+                      {item.title}
+                    </p>
+                    <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+
+            </CardContent>
+          </Card>
+          
+        </section>
+        
+
+        {/* Next steps */}
         <section className="grid grid-cols-1 gap-4">
           <Card>
             <CardHeader>
-              <CardTitle>Recommended next actions</CardTitle>
+              <CardTitle>Next steps</CardTitle>
             </CardHeader>
             <CardContent>
               <ol className="flex flex-col gap-3">
                 {actions.map((action, i) => (
-                  <li key={i} className="flex gap-3 text-sm text-gray-700">
+                  <li key={action.title} className="flex gap-3">
                     <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-gray-900 text-xs font-semibold text-white">
                       {i + 1}
                     </span>
-                    <span className="pt-0.5">{action}</span>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-900">
+                        {action.title}
+                      </p>
+                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                        {action.description}
+                      </p>
+                    </div>
                   </li>
                 ))}
               </ol>
